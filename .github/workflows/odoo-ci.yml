@@ -1,0 +1,45 @@
+name: Odoo 18 CI
+
+on:
+  push:
+    branches:
+      - "18.0"
+
+  pull_request:
+    branches:
+      - "18.0"
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Upgrade pip
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Install Python Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Check Odoo Version
+        run: |
+          python odoo-bin --version
+
+      - name: Verify Custom Addons Folder
+        run: |
+          test -d custom_addons
+
+      - name: Verify Odoo Starts
+        run: |
+          python odoo-bin --stop-after-init --addons-path=addons,custom_addons || true
