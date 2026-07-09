@@ -21,8 +21,6 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /opt/odoo
 
-COPY custom_addons /mnt/extra-addons
-COPY odoo.conf /etc/odoo/odoo.conf
 COPY . .
 
 RUN pip install --no-cache-dir -r requirements.txt
