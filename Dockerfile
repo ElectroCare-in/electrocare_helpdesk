@@ -27,3 +27,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 EXPOSE 8069
 
 CMD ["sh", "-c", "python3 odoo-bin -c odoo.conf --db_host=$PGHOST --db_port=$PGPORT --db_user=$PGUSER --db_password=$PGPASSWORD --http-port=$PORT"]
+
+
+
